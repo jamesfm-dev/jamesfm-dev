@@ -24,7 +24,7 @@ type SocialsResponse = {
 	};
 };
 
-export type Provider = "twitter" | "github" | "email" | "website" | "mastodon" | "linkedin";
+export type Provider = "twitter" | "github" | "email" | "mastodon" | "linkedin";
 
 export type Socials = Social[];
 
@@ -40,7 +40,6 @@ export const querySocials = async () => {
       url
       twitterUsername
       email
-      websiteUrl
       socialAccounts(first: 10) {
         nodes {
           displayName
@@ -67,11 +66,6 @@ function formatSocials(socials: SocialsResponse) {
 			url: viewer.email,
 			provider: "email",
 			displayName: viewer.email,
-		},
-		{
-			url: viewer.websiteUrl,
-			provider: "website",
-			displayName: viewer.websiteUrl,
 		},
 		{
 			url: viewer.twitterUsername ? `https://twitter.com/${viewer.twitterUsername}` : "",
