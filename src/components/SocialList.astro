@@ -1,5 +1,4 @@
 ---
-// import { SOCIAL_LINKS } from "@/data/constants";
 import Icon from "./Icon.astro";
 import { querySocials } from "@/data/socials";
 
@@ -119,8 +118,7 @@ const socials = await querySocials();
 			socials.map((link) => {
 				if (link.displayName == null) return;
 
-				const isWide =
-					link.provider == "email" || link.provider == "mastodon" || link.provider == "website";
+				const isWide = link.provider == "email" || link.provider == "mastodon";
 				const providerPascalCase = link.provider.charAt(0).toUpperCase() + link.provider.slice(1);
 
 				return (
@@ -131,7 +129,7 @@ const socials = await querySocials();
 							target="_blank"
 							rel={link.provider == "mastodon" ? "me" : "noopener noreferrer"}
 						>
-							<Icon icon={link.provider == "website" ? "link" : link.provider} />
+							<Icon icon={link.provider} />
 							<span class="sr-only">{link.provider}</span>
 							<span class={isWide ? "tooltiptext-wide" : "tooltiptext"}>
 								<p class="font-bold">{providerPascalCase}</p>
