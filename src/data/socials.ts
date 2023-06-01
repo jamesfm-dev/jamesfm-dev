@@ -2,11 +2,7 @@ import { graphql } from "@octokit/graphql";
 
 const query = graphql.defaults({
 	headers: {
-		authorization: `token ${
-			import.meta.env.NODE_ENV != "production"
-				? import.meta.env.GITHUB_TOKEN
-				: import.meta.env.PROD_GITHUB_TOKEN
-		}`,
+		authorization: `token ${import.meta.env.GH_TOKEN}`,
 	},
 });
 
