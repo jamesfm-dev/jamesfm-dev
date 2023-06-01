@@ -1,0 +1,44 @@
+---
+import { MENU_LINKS } from "@/data/constants";
+---
+
+<footer
+	class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pb-4 pt-20 text-center align-top text-gray-500 sm:flex-row sm:justify-between sm:text-xs"
+>
+	<span class="me-0 flex gap-x-2 sm:me-4 sm:gap-x-0 sm:divide-x sm:divide-gray-500">
+		<span>
+			Made with <span aria-label="heart emoji" class="group" style="display: inline">
+				<span class="dark:hidden">&#128153;</span>
+				<span class="hidden dark:inline">&#128154;</span>
+			</span>
+			by <a
+				class="py-2 sm:py-0 sm:hover:text-textColor sm:hover:underline"
+				href="https://github.com/jamesfm-dev"
+				rel="noopener noreferrer"
+				target="_blank">me</a
+			> using
+			<a
+				class="py-2 sm:py-0 sm:hover:text-textColor sm:hover:underline"
+				href="https://github.com/chrismwilliams/astro-theme-cactus"
+				rel="noopener noreferrer"
+				target="_blank">Astro Cactus</a
+			>
+			template
+		</span>
+	</span>
+	<nav
+		aria-label="More on this site"
+		class="flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-gray-500"
+	>
+		{
+			MENU_LINKS.map((link) => (
+				<a
+					href={link.path}
+					class="px-4 py-2 sm:px-2 sm:py-0 sm:hover:text-textColor sm:hover:underline"
+				>
+					{link.title}
+				</a>
+			))
+		}
+	</nav>
+</footer>

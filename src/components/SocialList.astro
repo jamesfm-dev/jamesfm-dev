@@ -1,0 +1,146 @@
+---
+// import { SOCIAL_LINKS } from "@/data/constants";
+import Icon from "./Icon.astro";
+import { querySocials } from "@/data/socials";
+
+const socials = await querySocials();
+
+// *** SVG icons from https://tablericons.com/ ***
+---
+
+<style>
+	.tooltip {
+		position: relative;
+		display: inline-block;
+	}
+
+	.tooltip .tooltiptext-wide {
+		visibility: hidden;
+		width: 220px;
+		background-color: var(--theme-text);
+		color: var(--theme-bg);
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 125%;
+		left: 50%;
+		margin-left: -110px;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+		scale: 0;
+		transition: all 0.15s;
+	}
+
+	.tooltip .tooltiptext-wide::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: var(--theme-text) transparent transparent transparent;
+	}
+
+	.tooltip:hover .tooltiptext-wide {
+		visibility: visible;
+		scale: 1;
+		-webkit-animation: slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+		animation: slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	}
+
+	.tooltip .tooltiptext {
+		visibility: hidden;
+		width: 150px;
+		background-color: var(--theme-text);
+		color: var(--theme-bg);
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 125%;
+		left: 50%;
+		margin-left: -75px;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+		scale: 0;
+		transition: all 0.15s;
+	}
+
+	.tooltip .tooltiptext::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: var(--theme-text) transparent transparent transparent;
+	}
+
+	.tooltip:hover .tooltiptext {
+		visibility: visible;
+		scale: 1;
+		-webkit-animation: slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+		animation: slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	}
+
+	@-webkit-keyframes slide-up {
+		0% {
+			-webkit-transform: translateY(100%);
+			transform: translateY(100%);
+			opacity: 0;
+		}
+		100% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+	@keyframes slide-up {
+		0% {
+			-webkit-transform: translateY(100%);
+			transform: translateY(100%);
+			opacity: 0;
+		}
+		100% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+</style>
+
+<div class="flex flex-wrap items-center gap-x-4 sm:items-center">
+	<p>Find me on</p>
+	<ul class="flex flex-1 items-center gap-x-4 sm:flex-initial">
+		{
+			socials.map((link) => {
+				if (link.displayName == null) return;
+
+				const isWide =
+					link.provider == "email" || link.provider == "mastodon" || link.provider == "website";
+				const providerPascalCase = link.provider.charAt(0).toUpperCase() + link.provider.slice(1);
+
+				return (
+					<li class="tooltip">
+						<a
+							class="inline-block p-2 hover:outline-none sm:hover:text-link"
+							href={link.provider == "email" ? `mailto:${link.url}` : link.url}
+							target="_blank"
+							rel={link.provider == "mastodon" ? "me" : "noopener noreferrer"}
+						>
+							<Icon icon={link.provider == "website" ? "link" : link.provider} />
+							<span class="sr-only">{link.provider}</span>
+							<span class={isWide ? "tooltiptext-wide" : "tooltiptext"}>
+								<p class="font-bold">{providerPascalCase}</p>
+								<span>{link.displayName}</span>
+							</span>
+						</a>
+					</li>
+				);
+			})
+		}
+	</ul>
+</div>
