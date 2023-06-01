@@ -12,6 +12,7 @@ permissions:
 
 env:
   NODE_VERSION: 18
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
