@@ -8,7 +8,10 @@ type Props = SiteMeta;
 const { title, description, articleDate } = Astro.props;
 
 const titleSeparator = ":";
-const siteTitle = `${title} ${titleSeparator} ${siteConfig.title}`;
+const siteTitle =
+	Astro.url.pathname == "/"
+		? `${siteConfig.author}`
+		: `${title} ${titleSeparator} ${siteConfig.title}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
