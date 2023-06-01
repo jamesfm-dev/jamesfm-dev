@@ -8,7 +8,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://www.jamesfm.dev",
+	site: "https://jamesfm.dev",
 	markdown: {
 		shikiConfig: {
 			theme: "dracula",
