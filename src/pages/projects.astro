@@ -8,8 +8,8 @@ import { filterProjectNames } from "@/utils";
 import { formatDistanceToNow } from "date-fns";
 
 const meta = {
-	title: "Projects",
-	description: "A collection of my open source projects",
+  title: "Projects",
+  description: "A collection of my open source projects",
 };
 
 const projects = await queryProjects();
@@ -17,33 +17,33 @@ const projectNames = filterProjectNames(projects);
 ---
 
 <PageLayout meta={meta}>
-	<div class="space-y-6">
-		<h1 class="title">{meta.title}</h1>
-		<ul class="space-y-5 sm:space-y-10">
-			{
-				projectNames.map((project) => (
-					<li class="flex flex-col gap-2">
-						<Heading
-							projectUrl={project.url}
-							description={project.description}
-							name={project.name}
-						/>
-						<Progress data={project.languages} />
-						<LanguageList languages={project.languages} />
-						<span class="text-xs sm:flex sm:justify-between">
-							<span class="flex-none">
-								last commit {formatDistanceToNow(new Date(project.updatedAt), { addSuffix: true })}
-							</span>
-							<a
-								href={project.url}
-								class="block hover:underline hover:underline-offset-4 hover:outline-none sm:inline-flex sm:hover:text-link"
-							>
-								Source code
-							</a>
-						</span>
-					</li>
-				))
-			}
-		</ul>
-	</div>
+  <div class="space-y-6">
+    <h1 class="title">{meta.title}</h1>
+    <ul class="space-y-5 sm:space-y-10">
+      {
+        projectNames.map((project) => (
+          <li class="flex flex-col gap-2">
+            <Heading
+              projectUrl={project.url}
+              description={project.description}
+              name={project.name}
+            />
+            <Progress data={project.languages} />
+            <LanguageList languages={project.languages} />
+            <span class="text-xs sm:flex sm:justify-between">
+              <span class="flex-none">
+                last commit {formatDistanceToNow(new Date(project.pushedAt), { addSuffix: true })}
+              </span>
+              <a
+                href={project.url}
+                class="block hover:underline hover:underline-offset-4 hover:outline-none sm:inline-flex sm:hover:text-link"
+              >
+                Source code
+              </a>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </PageLayout>
