@@ -29,6 +29,7 @@ type ProjectItem = {
 		description: string;
 		primaryLanguage: Omit<LanguageItem, "size">["node"];
 		updatedAt: string;
+		pushedAt: string;
 	};
 };
 
@@ -69,6 +70,7 @@ export const queryProjects = async () => {
                 name
               }
               updatedAt
+              pushedAt
             }
           }
         }

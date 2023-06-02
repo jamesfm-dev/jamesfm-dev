@@ -8,7 +8,8 @@ export function filterProjectNames(projects: ProjectsReponse) {
 			url: x.node.url,
 			description: x.node.description,
 			languages: formatLanguages(x.node.languages.edges, x.node.languages.totalSize),
-      updatedAt: x.node.updatedAt,
+			updatedAt: x.node.updatedAt,
+			pushedAt: x.node.pushedAt,
 		};
 	});
 }
