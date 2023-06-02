@@ -1,0 +1,25 @@
+---
+interface Props {
+	data: any[];
+}
+
+const { data }: Props = Astro.props;
+---
+
+<span
+	class="w-100 col-span-2 inline-flex h-[6px] gap-[2px] overflow-hidden rounded bg-transparent outline-1"
+>
+	{
+		data.map((value) => {
+			return (
+				<span
+					style={{
+						backgroundColor: value.color,
+						width: value.percentage.concat("%"),
+						height: "100%",
+					}}
+				/>
+			);
+		})
+	}
+</span>
